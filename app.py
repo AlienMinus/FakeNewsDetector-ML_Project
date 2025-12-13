@@ -15,19 +15,20 @@ nltk.download('wordnet')
 
 st.title("📰 Fake News Classifier")
 
-# Load Pretrained Model and Tokenizer
-model_path = "Models/fakenews_model.h5"
+# Use the new Keras format if possible
+model_path = "Models/my_model.keras"
 tokenizer_path = "Models/tokenizer.pickle"
 
 if os.path.exists(model_path) and os.path.exists(tokenizer_path):
     st.success("Loading pretrained model and tokenizer...")
-    model = load_model(model_path)
+    model = load_model(model_path, compile=False)
     with open(tokenizer_path, 'rb') as handle:
         tokenizer = pickle.load(handle)
 else:
-    st.error("Model or tokenizer not found. Ensure 'fakenews_model.h5' and 'tokenizer.pickle' exist.")
+    st.error("Model or tokenizer not found. Ensure 'fakenews_model.keras' and 'tokenizer.pickle' exist.")
     st.stop()
 
+# ...rest of your code...
 # Text Preprocessing
 tokenizer_num_words = 5000
 lemmatizer = WordNetLemmatizer()
